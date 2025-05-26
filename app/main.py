@@ -1,20 +1,19 @@
 from fastapi import FastAPI
-from models import MsgPayload
-from routers import messages, users, analytics
+from app.routers import customers, leads, opportunities, contacts, dashboard
 
 app = FastAPI()
 
 # Include all routers
-app.include_router(messages.router)
-app.include_router(users.router)
-app.include_router(analytics.router)
+app.include_router(customers.router)
+app.include_router(leads.router)
+app.include_router(opportunities.router)
+app.include_router(contacts.router)
+app.include_router(dashboard.router)
 
-# Remove the duplicated routes and keep only the general ones
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"message": "Hello"}
-
+    return {"message": "Welcome to the CRM API"}
 
 @app.get("/about")
 def about() -> dict[str, str]:
-    return {"message": "This is the about page."}
+    return {"message": "This is the CRM application API."}
